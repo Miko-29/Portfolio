@@ -1,0 +1,50 @@
+src/
+└── app/
+    ├── app.component.ts
+    ├── app.component.html
+    ├── app.component.scss
+    ├── app.config.ts
+    ├── app.routes.ts
+
+    ├── core/
+    │   ├── core.module.ts
+    │   ├── services/
+    │   └── animations/
+
+    ├── shared/
+    │   ├── shared.module.ts
+    │   ├── components/
+    │   ├── directives/
+    │   └── pipes/
+
+    ├── layout/
+    │   ├── header/
+    │   │   ├── header.component.ts
+    │   │   ├── header.component.html
+    │   │   └── header.component.scss
+    │   └── footer/
+    │       ├── footer.component.ts
+    │       ├── footer.component.html
+    │       └── footer.component.scss
+
+    ├── pages/
+    │   ├── home/
+    │   │   ├── hero/
+    │   │   │   ├── hero.component.ts
+    │   │   │   └── hero.component.html
+    │   │   ├── featured-projects/
+    │   │   │   ├── featured-projects.component.ts
+    │   │   │   └── featured-projects.component.html
+    │   │   └── home.component.ts ← (standalone, lazy-loaded)
+    │
+    │   ├── about/
+    │   │   └── about.component.ts ← (standalone, lazy-loaded)
+    │
+    │   ├── work/
+    │   │   ├── project-detail/
+    │   │   │   ├── project-detail.component.ts
+    │   │   │   └── project-detail.component.html
+    │   │   └── work.component.ts ← (standalone, lazy-loaded)
+    │
+    │   └── contact/
+    │       └── contact.component.ts ← (standalone, lazy-loaded)
