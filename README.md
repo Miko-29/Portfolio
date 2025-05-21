@@ -22,7 +22,6 @@ A visually rich, animation-first portfolio built with **Angular 19** and **Anime
 | **SCSS**                          | Custom styling & design tokens      |
 | **HTML5**                         | Semantic layout                     |
 | **TypeScript**                    | Scalable, typed scripting           |
-| **Netlify / Vercel** *(optional)* | Deployment & CI/CD                  |
 
 ---
 
