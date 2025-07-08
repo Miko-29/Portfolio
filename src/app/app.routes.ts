@@ -4,13 +4,14 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ProjectDetailComponent } from './pages/work/project-detail/project-detail.component';
 import { WorkComponent } from './pages/work/work.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LandingComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'work', component: WorkComponent },
   { path: 'work/:id', component: ProjectDetailComponent },
   { path: 'contact', component: ContactComponent },
   { path: '**', redirectTo: '' },
 ];
-  

@@ -442,3 +442,184 @@ ng g c shared/section-title --standalone --style=css
 * Simple validation
 * Optional SVG or canvas animation
 
+Awesome choice! The **"Cyber City"** theme is bold, futuristic, and tech-heavy — perfect for a developer portfolio. Here's how we can break it down into **scroll-based scenes**, each reflecting your skills and personality while building a stunning visual experience.
+
+---
+
+## 🏙️ Cyber City Portfolio — Scene & Section Plan
+
+### 🎬 **1. Hero Intro — Neon Skyline**
+
+* **Scene:** Animated city skyline at night with neon signs and blinking buildings.
+* **Animation:** Buildings fade in; a "Welcome to My City" sign animates with flicker/glow.
+* **Tools:** SVG city, Anime.js for flicker/timeline.
+* **Angular Component:** `pages/home/hero`
+
+---
+
+### 🚇 **2. Metro Journey — Skills Train**
+
+* **Scene:** Metro line travels through tunnels, stopping at "Frontend", "Backend", "UI/UX", etc.
+* **Animation:** Train SVG slides on scroll, stations light up.
+* **Tools:** Scroll-trigger + SVG train line
+* **Angular Component:** `pages/home/skills-train`
+
+---
+
+### 🧠 **3. Neural Tower — What I Know**
+
+* **Scene:** A glowing cyber tower made of circuits; each floor represents a tech (Angular, CSS, etc).
+* **Animation:** Floor illuminates as you scroll.
+* **Tools:** Anime.js path animation, vertical scroll
+* **Component:** `pages/about/tech-tower`
+
+---
+
+### 📂 **4. Project Grid — City Screens**
+
+* **Scene:** Hologram billboards in the city show your projects.
+* **Animation:** Grid items fade/slide in like floating screens.
+* **Tools:** CSS grid + Anime.js entrance animation
+* **Component:** `pages/work`
+
+---
+
+### 🛰️ **5. Contact — Radio Tower / Satellite**
+
+* **Scene:** Tower emits signal to contact you; signal pulses when form is submitted.
+* **Animation:** Signal pulse + animated SVG waveform
+* **Tools:** Anime.js + Angular forms
+* **Component:** `pages/contact`
+
+---
+
+### ✨ Visual Elements
+
+* **Colors:** Electric blue, neon green, pink, deep purple
+* **Fonts:** Eurostile, Orbitron, or other sci-fi typography
+* **UI Add-ons:** Glitch effects, cyber noise, scanlines, flickering text
+
+---
+
+### 🛠 Folder Structure Integration
+
+```
+src/
+├── app/
+│   ├── pages/
+│   │   ├── home/
+│   │   │   ├── hero/
+│   │   │   └── skills-train/
+│   │   ├── about/
+│   │   │   └── tech-tower/
+│   │   ├── work/
+│   │   └── contact/
+│   ├── layout/
+│   │   ├── header/
+│   │   └── footer/
+│   ├── shared/
+│   │   └── components/
+│   └── core/
+```
+
+
+---
+
+## 📐 Cyber City Portfolio — Figma Wireframe Blueprint
+
+### 🎨 **Frame Size**
+
+* **Type:** Desktop (1440px width)
+* **Height:** Variable per section (1000–1500px)
+
+---
+
+### 🧩 **Page Sections / Wireframe Components**
+
+---
+
+### **1. Hero Intro: Neon Skyline**
+
+**Figma frame name:** `01-Hero`
+
+| Element           | Type                                      | Placement      |
+| ----------------- | ----------------------------------------- | -------------- |
+| Background        | Dark gradient (black to deep purple)      |                |
+| Skyline SVG       | Vector/Illustration                       | Bottom 40%     |
+| Neon title        | Large heading: “Welcome to My Cyber City” | Center         |
+| Subtitle          | “Frontend Dev • Angular • UI Engineer”    | Below title    |
+| Enter button      | Glowing “Enter City” button               | Below subtitle |
+| Background motion | Floating particles or glowing lights      | Back layer     |
+
+---
+
+### **2. Skills: Metro Line**
+
+**Figma frame name:** `02-Skills`
+
+| Element        | Type                                   | Placement              |
+| -------------- | -------------------------------------- | ---------------------- |
+| Background     | Tunnel / circuit-style dark background |                        |
+| SVG Metro line | Horizontal or vertical path            | Center                 |
+| Stations       | Circle nodes with icons                | Equidistant along line |
+| Label          | Text: “Angular”, “TypeScript”, etc.    | Near stations          |
+
+---
+
+### **3. About: Neural Tower**
+
+**Figma frame name:** `03-About`
+
+| Element           | Type                                          | Placement            |
+| ----------------- | --------------------------------------------- | -------------------- |
+| Tower             | Stacked circuit design                        | Center vertical      |
+| Levels            | Blocks labeled: “Who I Am”, “Strengths”, etc. |                      |
+| Animations (hint) | Arrows, lights, wires                         | Annotations in notes |
+| Avatar or SVG     | Optional: your face/robot avatar              | Left/right corner    |
+
+---
+
+### **4. Work: City Screens Grid**
+
+**Figma frame name:** `04-Work`
+
+| Element         | Type                      | Placement                 |
+| --------------- | ------------------------- | ------------------------- |
+| Grid of screens | 3-column project cards    | Center                    |
+| Each card       | Image + title + tag       | With hover animation hint |
+| Background city | Transparent city at night | Backdrop                  |
+| Section title   | “My Projects”             | Top center                |
+
+---
+
+### **5. Contact: Radio Tower**
+
+**Figma frame name:** `05-Contact`
+
+| Element      | Type                         | Placement            |
+| ------------ | ---------------------------- | -------------------- |
+| Background   | City outskirts / stars       |                      |
+| Radio tower  | Tall SVG or image            | Left or center       |
+| Signal waves | Concentric circles           | Emanating from tower |
+| Contact form | Fields: name, email, message | Right or below       |
+| Send button  | Cyber-style button           | Below form           |
+
+---
+
+### 📦 Optional Shared Elements
+
+* **Navbar (top, fixed):** “Home | About | Work | Contact”
+* **Footer:** Cyber glyphs, social links, GitHub
+
+---
+
+## 🛠 Build in Figma
+
+1. Use **Desktop 1440px width frames**
+2. Place each section in a separate **Figma page or frame**
+3. Label layers clearly (e.g., `#H1`, `Button-Enter`, `Tower-Level-1`)
+4. Add **Annotations** for animations (e.g., “Anime.js fade-in here”)
+
+---
+
+

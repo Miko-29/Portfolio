@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  background: #000;
+  overflow: hidden;
+  background-image: radial-gradient(
+      circle at 40% 50%,
+      #390705 0%,
+      #a30d8a00 40%
+    ),
+    radial-gradient(circle at 65% 60%, #00224d 0%, #580e7500 45%),
+    radial-gradient(circle at 40% 60%, #5d0e41 0%, #17777700 45%);
+  background-blend-mode: screen;
+}
+
+.scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  /* background: black; */
+  perspective: 1000px;
+}
+
+.star {
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow: 0 0 4px #CFFFE2, 0 0 8px #CFFFE2;
+  /* filter: blur(0.5px); */
+  mix-blend-mode: screen;
+  position: absolute;
+  /* transform: translate(-50%, -50%); */
+  transform-style: preserve-3d;
+  transform: translateZ(-500px);
+}
