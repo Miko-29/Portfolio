@@ -1,5 +1,23 @@
 <section class="hero-section">
-    <h1 class="hero-title">Hi, I'm Muskan</h1>
-    <p class="hero-subtitle">I create modern, animated web experiences.</p>
-  </section>
-  
+  <div #scene class="scene">
+    <div class="star" *ngFor="let star of stars"></div>
+  </div>
+  <h1 class="text-7xl font-bold text-white sm:truncate">Hi, I'm Muskan</h1>
+  <div
+    #container
+    class="scroll-reveal-container"
+  >
+    <p class="flex flex-wrap gap-3 text-center max-w-4xl justify-center">
+      <ng-container *ngFor="let word of words">
+        <span class="sui-text-reveal opacity-0 inline-block translate-y-5">
+          {{ word }}
+        </span>
+      </ng-container>
+    </p>
+  </div>
+</section>
+<!--When I’m not coding, you might
+    find me immersed in a canvas, painting stories in color — a creative outlet
+    that keeps my mind balanced and inspired. I'm always up for solving complex
+    problems, collaborating on exciting ideas, and turning imagination into
+    reality through code.  -->

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { animate } from 'animejs';
 
 @Component({
@@ -12,7 +13,7 @@ import { animate } from 'animejs';
 export class LandingComponent implements AfterViewInit {
   @ViewChild('scene', { static: true }) sceneRef!: ElementRef;
   stars = Array(300).fill(0);
-
+  constructor(private router: Router) {}
   ngAfterViewInit(): void {
     const stars = this.sceneRef.nativeElement.querySelectorAll('.star');
     const centerX = window.innerWidth / 2;
@@ -30,6 +31,9 @@ export class LandingComponent implements AfterViewInit {
       const maxDistance = Math.sqrt(centerX ** 2 + centerY ** 2) * 2;
       const distance = Math.random() * maxDistance + maxDistance * 0.5;
 
+      //Set initial size
+      const size = Math.random() * 2;
+
       // Set initial position
       star.style.left = `${startX}px`;
       star.style.top = `${startY}px`;
@@ -39,7 +43,7 @@ export class LandingComponent implements AfterViewInit {
         translateX: Math.cos(angle) * distance,
         translateY: Math.sin(angle) * distance,
         translateZ: ['-500px', '0px'],
-        scale: [1, 5],
+        scale: [size * 1, size * 5],
         opacity: [{ value: 1 }, { value: 0, duration: 2000 }],
         duration: Math.random() * 10000,
         delay: Math.random() * 1500,
@@ -49,5 +53,8 @@ export class LandingComponent implements AfterViewInit {
         filter: 'blur(1px)',
       });
     });
+  }
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 }
