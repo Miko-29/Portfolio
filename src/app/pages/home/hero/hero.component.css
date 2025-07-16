@@ -1,78 +1,52 @@
-
-* {
-  margin: 0;
-  padding: 0;
-  cursor: crosshair;
-}
-.scene {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  /* background: black; */
-  /* perspective: 1000px; */
-}
-
-.star {
-  width: 2px;
-  height: 2px;
-  background: white;
-  box-shadow: 0 0 4px #cfffe2, 0 0 8px #cfffe2;
-  /* filter: blur(0.5px); */
-  mix-blend-mode: screen;
-  position: absolute;
-  /* transform: translate(-50%, -50%); */
-  transform-style: preserve-3d;
-  transform: translateZ(-500px);
-}
 .hero-section {
   height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* align-items: center; */
   padding: 0 5vw;
-  background: #000;
-  overflow: hidden;
-  background-image: radial-gradient(
-      circle at 40% 50%,
-      #390705 0%,
-      #a30d8a00 40%
-    ),
-    radial-gradient(circle at 65% 60%, #00224d 0%, #580e7500 45%),
-    radial-gradient(circle at 40% 60%, #5d0e41 0%, #17777700 45%);
-  background-blend-mode: screen;
   position: relative;
   color: #fff;
 }
 .hero-title {
   font-size: 4rem;
-  margin-bottom: 1rem;
+  font-weight: bold;
+  color: white;
+  transition: transform 0.4s ease;
+  /* transform: translate(-50%, -50%); */
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 .hero-subtitle {
-  font-size: 1.5rem;
-  color: #aaa;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.hero-subtitle p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  text-align: center;
+  justify-content: center;
 }
 .text-reveal {
   transition: none;
   opacity: 0;
   transform: translateY(20px);
   will-change: opacity, transform;
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(1.25rem);
 }
 
 .scroll-reveal-container {
-  position: fixed; /* Required for inset-like behavior */
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  color: white; /* text-white */
-  display: flex; /* flex */
-  align-items: center; /* items-center */
-  justify-content: center; /* justify-center */
-
-  font-size: 3rem; /* text-5xl (approx 48px) */
-  font-weight: bold; /* font-bold */
-  padding-left: 2.5rem; /* px-10 = 40px */
-  padding-right: 2.5rem;
 }

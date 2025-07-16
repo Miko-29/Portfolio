@@ -1,0 +1,24 @@
+.cyber-gradient-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  background: #000;
+  background-image: radial-gradient(
+      circle at 40% 50%,
+      #390705 0%,
+      #a30d8a00 40%
+    ),
+    radial-gradient(circle at 65% 60%, #00224d 0%, #580e7500 45%),
+    radial-gradient(circle at 40% 60%, #5d0e41 0%, #17777700 45%);
+  background-blend-mode: screen;
+}
+
+.cyber-city-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

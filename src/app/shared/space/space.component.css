@@ -1,0 +1,42 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  overflow: hidden;
+  background-image: radial-gradient(
+      circle at 40% 50%,
+      #390705 0%,
+      #a30d8a00 40%
+    ),
+    radial-gradient(circle at 65% 60%, #00224d 0%, #580e7500 45%),
+    radial-gradient(circle at 40% 60%, #5d0e41 0%, #17777700 45%);
+  background-blend-mode: screen;
+}
+
+.star {
+  width: 1px;
+  height: 1px;
+  background: white;
+  box-shadow: 0 0 4px #cfffe2, 0 0 8px #cfffe2;
+  /* filter: blur(0.5px); */
+  mix-blend-mode: screen;
+  position: absolute;
+  /* transform: translate(-50%, -50%); */
+  /* transform-style: preserve-3d; */
+  /* transform: translateZ(-500px); */
+}
