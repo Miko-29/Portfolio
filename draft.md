@@ -624,3 +624,46 @@ src/
 cyber city by "Asian Themed Low Poly Night City Buildings" (https://skfb.ly/pwKLV) by 99.Miles is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 planets by "Various Planets" (https://skfb.ly/o7F9p) by Feivelyn is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+space by "Billions stars Skybox HDRI panorama" (https://skfb.ly/oKvUU) by Aliaksandr.melas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+#0c6368
+#94b0b2
+#617c7e
+#56557c
+#8987b0
+
+#e82773
+#bc3d91
+#874e9b
+#545491
+#325178
+#2f4858
+
+#845ec2
+#4b4453
+#b0a8b9
+#c34a36
+#ff8066
+
+#1A1A2E
+#16213E
+#0F3460
+#E94560
+
+#e94560
+#e2979b
+#f7f5dd
+#9bdeac
+
+#e94560
+#bd8183
+#fff5f5
+#f7f5dd
+
+#e94560
+#c64683
+#945093
+#60558e
+#395177
+#2f4858
