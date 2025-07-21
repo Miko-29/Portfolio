@@ -12,6 +12,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { PointLightHelper, TextureLoader } from 'three';
 import { animate } from 'animejs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cosmos',
@@ -37,14 +38,22 @@ export class CosmosComponent implements AfterViewInit {
   renderer!: THREE.WebGLRenderer;
   controls!: OrbitControls;
   animationFrameId!: number;
-  planetGroup!: THREE.Group<THREE.Object3DEventMap>;
   planetPositions = [
     new THREE.Vector3(-60, 0, -30), // Left front
     new THREE.Vector3(50, -10, -10), // Right front
     new THREE.Vector3(-30, 5, -120), // Left back
     new THREE.Vector3(30, 5, -60), // Right back
   ];
-  planetMeshes: THREE.Group[] = [];
+  planetGroup!: THREE.Group<THREE.Object3DEventMap>;
+  planetMeshes: THREE.Mesh[] = [];
+  planetLabels: {
+    name: string;
+    mesh: THREE.Object3D;
+    screenX: number;
+    screenY: number;
+    scale: number;
+  }[] = [];
+  routes = ['about', 'experience', 'projects', 'skills'];
   stars = Array(100).fill(0);
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
@@ -65,7 +74,7 @@ export class CosmosComponent implements AfterViewInit {
     // this.animate();
   }
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone, private router: Router) {}
 
   initScene() {
     const container = this.container.nativeElement;
@@ -165,7 +174,7 @@ export class CosmosComponent implements AfterViewInit {
 
       //   // Animate twinkling
       animate(star, {
-        scale: [size * 1, size * 2],
+        scale: [size * 1, size * 1.5],
         duration: 1000,
         delay: Math.random() * 1500,
         easing: 'easeOutQuad',
@@ -177,19 +186,89 @@ export class CosmosComponent implements AfterViewInit {
     });
   }
 
-  renderLoop(): void {
+  loadPlanets() {
+    this.planetGroup = new THREE.Group();
+
+    this.planetPositions.forEach((position, i) => {
+      const geometry = new THREE.SphereGeometry(20, 64, 64);
+      const normalMap = new THREE.TextureLoader().load(
+        'assets/textures/4k_ceres_fictional.jpg'
+      );
+      const material = new THREE.MeshStandardMaterial({
+        color: '#2f4858',
+        normalMap,
+      });
+
+      const planet = new THREE.Mesh(geometry, material);
+      planet.castShadow = planet.receiveShadow = true;
+      planet.position.copy(position);
+
+      const halo = new THREE.Mesh(
+        new THREE.SphereGeometry(21, 64, 64),
+        new THREE.ShaderMaterial({
+          vertexShader: `
+            varying vec3 vertexNormal;
+            void main() {
+              vertexNormal = normalize(normalMatrix * normal);
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+          `,
+          fragmentShader: `
+            varying vec3 vertexNormal;
+            void main() {
+              float intensity = pow(0.6 - dot(vertexNormal, vec3(0,0,1)), 4.0);
+              gl_FragColor = vec4(0.2,0.8,1.0,0.15) * intensity;
+            }
+          `,
+          blending: THREE.AdditiveBlending,
+          transparent: true,
+          side: THREE.BackSide,
+          depthWrite: false,
+        })
+      );
+      halo.position.copy(position);
+
+      this.planetGroup.add(planet, halo);
+      this.planetMeshes.push(planet);
+
+      this.planetLabels.push({
+        name: this.routes[i],
+        mesh: planet,
+        screenX: 0,
+        screenY: 0,
+        scale: 1,
+      });
+    });
+
+    this.scene.add(this.planetGroup);
+  }
+
+  renderLoop() {
     this.ngZone.runOutsideAngular(() => {
       const loop = () => {
         this.controls.update();
+        this.planetMeshes.forEach((m) => (m.rotation.y += 0.005));
 
-        // 🌌 Orbit all planets
-        // if (this.planetGroup) {
-        //   this.planetGroup.rotation.y += 0.001;
-        // }
+        const canvas = this.renderer.domElement;
+        const pos = new THREE.Vector3();
+        const worldPos = new THREE.Vector3();
 
-        // 🌀 Spin each planet on its own Y-axis
-        this.planetMeshes.forEach((planet) => {
-          planet.rotation.y += 0.005;
+        this.planetLabels.forEach((label) => {
+          // Get world center of the planet
+          label.mesh.getWorldPosition(worldPos);
+
+          // Position label just above the planet in world space
+          const labelWorld = worldPos.clone().add(new THREE.Vector3(0, 0, 0));
+          pos.copy(labelWorld).project(this.camera);
+
+          label.screenX = ((pos.x + 1) / 2) * canvas.clientWidth;
+          label.screenY = ((-pos.y + 1) / 2) * canvas.clientHeight;
+
+          const labelEl = document.getElementById(`label-${label.name}`);
+          if (!labelEl) return;
+
+          label.mesh.getWorldPosition(worldPos);
+          worldPos.project(this.camera);
         });
 
         this.renderer.render(this.scene, this.camera);
@@ -199,85 +278,31 @@ export class CosmosComponent implements AfterViewInit {
     });
   }
 
-  loadPlanets() {
-    const haloVertexShader = `
-    varying vec3 vertexNormal;
-    void main() {
-      vertexNormal = normalize(normalMatrix * normal);
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `;
-
-    const haloFragmentShader = `
-    varying vec3 vertexNormal;
-    void main() {
-      float intensity = pow(0.6 - dot(vertexNormal, vec3(0.0, 0.0, 1.0)), 4.0);
-      gl_FragColor = vec4(0.2, 0.8, 1.0, 0.15) * intensity;
-    }
-  `;
-
-    this.planetGroup = new THREE.Group();
-
-    this.planetPositions.forEach((position) => {
-      const geometry = new THREE.SphereGeometry(20, 64, 64);
-
-      const normalTexture = new THREE.TextureLoader().load(
-        'assets/textures/4k_ceres_fictional.jpg'
-      );
-      const material = new THREE.MeshStandardMaterial({
-        color: '#2f4858', // solid color
-        // roughness: 0.7,
-        // metalness: 0.1,
-        normalMap: normalTexture,
-      });
-
-      const planet = new THREE.Mesh(geometry, material);
-      planet.castShadow = true;
-      planet.receiveShadow = true;
-
-      const halo = new THREE.Mesh(
-        new THREE.SphereGeometry(21, 64, 64),
-        new THREE.ShaderMaterial({
-          vertexShader: haloVertexShader,
-          fragmentShader: haloFragmentShader,
-          blending: THREE.AdditiveBlending,
-          transparent: true,
-          side: THREE.BackSide,
-          depthWrite: false,
-        })
-      );
-
-      const planetWithHalo = new THREE.Group();
-      planetWithHalo.add(planet);
-      planetWithHalo.add(halo);
-      planetWithHalo.position.copy(position);
-
-      this.planetGroup.add(planetWithHalo);
-      this.planetMeshes.push(planetWithHalo);
-    });
-
-    this.scene.add(this.planetGroup);
-  }
-
   animate = () => {
     requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
   };
 
-  onMouseClick(event: MouseEvent): void {
-    const bounds = this.renderer.domElement.getBoundingClientRect();
-
-    this.mouse.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
-    this.mouse.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+  onMouseClick(event: MouseEvent) {
+    const r = this.renderer.domElement.getBoundingClientRect();
+    this.mouse.x = ((event.clientX - r.left) / r.width) * 2 - 1;
+    this.mouse.y = -((event.clientY - r.top) / r.height) * 2 + 1;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
+    const inter = this.raycaster.intersectObjects(this.planetMeshes, false);
 
-    const intersects = this.raycaster.intersectObjects(this.planetMeshes, true);
-
-    if (intersects.length > 0) {
-      const clickedPlanet = intersects[0].object;
-      console.log('🌍 Clicked planet:', clickedPlanet);
-      // You can do something fun here like highlight or animate it
+    if (inter.length > 0) {
+      const mesh = inter[0].object;
+      const label = this.planetLabels.find((l) => l.mesh === mesh);
+      this.router.navigate([
+        '/planet',
+        label?.name.toLowerCase().replace(' ', '-'),
+      ]);
     }
+  }
+
+  onPlanetClick(planetName: string) {
+    console.log('Navigating to', planetName);
+    this.router.navigate(['/', planetName.toLowerCase()]);
   }
 }

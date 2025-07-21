@@ -1,4 +1,39 @@
 <div #starcontainer class="cosmos-gradient-wrapper">
+  <div class="hero">Hi, I'm Muskan</div>
   <div class="star" *ngFor="let star of stars"></div>
   <div class="cosmos-container" #container></div>
+  <div *ngFor="let label of planetLabels">
+    <!-- floating label -->
+    <div
+      class="planet-label"
+      [attr.id]="'label-' + label.name"
+      [style.left.px]="label.screenX"
+      [style.top.px]="label.screenY"
+      [style.transform]="'translate(-50%, -50%) scale(' + label.scale + ')'"
+    >
+      {{ label.name | uppercase }}
+    </div>
+  </div>
+  <div class="contact">
+    <div class="social-links">
+      <span
+        ><a
+          href="https://www.linkedin.com/in/muskan-kumari-7a8937227"
+          target="_blank"
+          ><i class="fa-brands fa-linkedin"></i></a
+      ></span>
+      <span
+        ><a href="https://github.com/Miko-29" target="_blank"
+          ><i class="fa-brands fa-github"></i></a
+      ></span>
+      <span
+        ><a href="https://instagram.com/_miko_29" target="_blank"
+          ><i class="fa-brands fa-instagram"></i></a
+      ></span>
+      <span
+        ><a href="https://github.com/wlleroux84" target="_blank"
+          ><i class="fa-solid fa-paper-plane"></i></a
+      ></span>
+    </div>
+  </div>
 </div>

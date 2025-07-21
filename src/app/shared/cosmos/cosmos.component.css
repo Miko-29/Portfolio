@@ -35,3 +35,77 @@
   /* transform-style: preserve-3d; */
   /* transform: translateZ(-500px); */
 }
+.planet-label {
+  position: absolute;
+  color: white;
+  /* background: rgba(0, 0, 0, 0.7); */
+  /* border: 1px solid white; */
+  font-family: "Alumni Sans SC", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  pointer-events: auto;
+  cursor: pointer;
+  /* transform-origin: center; */
+  /* text-align: center; */
+  white-space: nowrap;
+}
+
+.planet-label::after {
+  content: "";
+  position: absolute;
+  background-color: #ffffff50;
+  width: 11px;
+  height: 3px;
+  left: -1px;
+  bottom: 3px;
+  height: 1px;
+  /* width: 100%; */
+  border-top: 1px solid rgba(var(--white));
+  transform: rotate(320deg);
+}
+.planet-label::before {
+  content: "";
+  position: absolute;
+  background-color: #ffffff50;
+  width: 54px;
+  height: 3px;
+  left: 8px;
+  bottom: 6px;
+  height: 1px;
+  width: 85%;
+  border-bottom: 1px solid rgba(var(--white));
+}
+
+.hero {
+  color: #fff;
+  padding: 10px 20px;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-size: 24px;
+  margin: 2px auto;
+  /* text-align: center; */
+  text-shadow: 0 0 30px rgb(0, 0, 0) !important;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.contact {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  width: 100%;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  color: #fff;
+}
+.social-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
