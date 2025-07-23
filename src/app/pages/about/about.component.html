@@ -1,1 +1,17 @@
-<p>about works!</p>
+<div class="main">
+  <app-cosmos></app-cosmos>
+  <div class="container">
+    <div #heading class="hero-title">
+      <h1>Hi, I'm</h1>
+    </div>
+    <div #container class="hero-subtitle">
+      <p>
+        <ng-container *ngFor="let word of words">
+          <span class="text-reveal">
+            {{ word }}
+          </span>
+        </ng-container>
+      </p>
+    </div>
+  </div>
+</div>

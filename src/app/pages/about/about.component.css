@@ -1,0 +1,52 @@
+.hero-section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  padding: 0 5vw;
+  position: relative;
+  color: #fff;
+}
+.hero-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  transition: transform 0.4s ease;
+  /* transform: translate(-50%, -50%); */
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.hero-subtitle {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.hero-subtitle p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  text-align: center;
+  justify-content: center;
+}
+.text-reveal {
+  transition: none;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(1.25rem);
+}
+
+.scroll-reveal-container {
+}
