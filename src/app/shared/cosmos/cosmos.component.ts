@@ -46,7 +46,7 @@ export class CosmosComponent implements AfterViewInit {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    this.camera.position.set(0, 10, 50);
+    this.camera.position.set(0, 0, 50);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.renderer.setSize(width, height);
@@ -55,17 +55,17 @@ export class CosmosComponent implements AfterViewInit {
     this.renderer.setClearColor(0x000000, 0);
     container.appendChild(this.renderer.domElement);
 
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = true;
-    this.controls.dampingFactor = 0.05;
-    this.controls.minDistance = 0;
-    this.controls.maxDistance = 100;
-    this.controls.minPolarAngle = Math.PI / 4;
-    this.controls.maxPolarAngle = Math.PI / 4;
-    this.controls.minAzimuthAngle = -Math.PI / 4;
-    this.controls.maxAzimuthAngle = Math.PI / 4;
-    this.controls.target.set(0, 0, 0);
-    this.controls.update();
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    // this.controls.enableDamping = true;
+    // this.controls.dampingFactor = 0.05;
+    // this.controls.minDistance = 0;
+    // this.controls.maxDistance = 100;
+    // this.controls.minPolarAngle = Math.PI / 4;
+    // this.controls.maxPolarAngle = Math.PI / 4;
+    // this.controls.minAzimuthAngle = -Math.PI / 4;
+    // this.controls.maxAzimuthAngle = Math.PI / 4;
+    // this.controls.target.set(0, 0, 0);
+    // this.controls.update();
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     this.scene.add(ambientLight);
@@ -149,7 +149,7 @@ export class CosmosComponent implements AfterViewInit {
   renderLoop() {
     this.ngZone.runOutsideAngular(() => {
       const loop = () => {
-        this.controls.update();
+        // this.controls.update();
         this.planetMesh.rotation.y += 0.005;
 
         this.renderer.render(this.scene, this.camera);

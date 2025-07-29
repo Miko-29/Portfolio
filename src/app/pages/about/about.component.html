@@ -1,17 +1,26 @@
-<div class="main">
-  <app-cosmos></app-cosmos>
-  <div class="container">
-    <div #heading class="hero-title">
-      <h1>Hi, I'm</h1>
-    </div>
-    <div #container class="hero-subtitle">
-      <p>
-        <ng-container *ngFor="let word of words">
-          <span class="text-reveal">
-            {{ word }}
-          </span>
-        </ng-container>
-      </p>
-    </div>
+<app-cosmos></app-cosmos>
+<!-- app-layout.component.html -->
+<div
+  *ngIf="showHomeIcon"
+  class="home-icon"
+  (click)="navigateHome()"
+  title="Go to Home"
+>
+  🏠
+</div>
+<div class="page-content" #pageContent>
+  <div #heading class="hero-title">
+    <h1>Hi, I'm Muskan</h1>
   </div>
+  <!-- <div #box class="hero-subtitle">
+    <p>
+      <ng-container *ngFor="let word of words">
+        <span class="text-reveal">
+          {{ word }}
+        </span>
+      </ng-container>
+    </p>
+    
+  </div> -->
+  <div #container class="typewriter-container"></div>
 </div>

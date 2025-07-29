@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { animate, Timeline } from 'animejs';
 import { CosmosComponent } from '../../shared/cosmos/cosmos.component';
-import { animate } from 'animejs';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-about',
@@ -12,142 +13,95 @@ import { CommonModule } from '@angular/common';
 })
 export class AboutComponent implements AfterViewInit {
   @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('heading') headingRef!: ElementRef;
+  @ViewChild('pageContent', { static: false })
+  pageContentRef!: ElementRef<HTMLDivElement>;
 
-  words: string[] =
-    'A frontend developer passionate about crafting responsive, intuitive web experiences with Angular and TypeScript, and everything in between. I believe great design isn’t just about how it looks, but how it feels when you use it. '.split(
-      ' '
-    );
-  currentIndex = 0;
-  maxIndex = 0;
-  scrollStage = 0;
+  text: string = `A frontend developer passionate about crafting responsive, intuitive web experiences with Angular and TypeScript, and everything in between. I believe great design isn't just about how it looks, but how it feels when you use it.`;
+  showHomeIcon = false;
 
-  // @HostListener('wheel', ['$event'])
-  // onWheel(event: WheelEvent) {
-  //   event.preventDefault(); // prevent page scroll
-
-  //   if (event.deltaY > 0) {
-  //     if (this.scrollStage === 0) {
-  //       this.animateHeadingToCorner();
-  //       this.scrollStage = 1;
-  //     } else {
-  //       this.revealNextWord();
-  //     }
-  //   } else {
-  //     if (this.scrollStage === 1 && this.currentIndex === 0) {
-  //       this.animateHeadingToCenter();
-  //       this.scrollStage = 0;
-  //     } else if (this.scrollStage === 1) {
-  //       this.revealPreviousWord();
-  //     }
-  //   }
-  // }
-
-  animateHeadingToCorner() {
-    animate(this.headingRef.nativeElement, {
-      translateX: { from: 200 },
-      translateY: { from: 200 },
-      // scale: 0.6,
-      duration: 700,
-      easing: 'easeInOutCubic',
-    });
-  }
-
-  animateHeadingToCenter() {
-    animate(this.headingRef.nativeElement, {
-      translateX: 0,
-      translateY: 0,
-      scale: 1,
-      duration: 600,
-      easing: 'easeInOutCubic',
-    });
-  }
-
-  revealNextWord() {
-    const spans =
-      this.containerRef.nativeElement.querySelectorAll('.text-reveal');
-    if (this.currentIndex >= spans.length) return;
-
-    const nextSpan = spans[this.currentIndex] as HTMLElement;
-
-    animate(nextSpan, {
-      opacity: 1,
-      translateY: [20, 0],
-      duration: 400,
-      easing: 'easeOutCubic',
-    });
-
-    this.currentIndex++;
-  }
-
-  revealPreviousWord() {
-    if (this.currentIndex <= 0) return;
-
-    this.currentIndex--;
-
-    const prevSpan = this.containerRef.nativeElement.querySelectorAll(
-      '.text-reveal'
-    )[this.currentIndex] as HTMLElement;
-
-    animate(prevSpan, {
-      opacity: 0,
-      translateY: 20,
-      duration: 300,
-      easing: 'easeInCubic',
-    });
-  }
+  constructor(private router: Router) {}
 
   ngAfterViewInit() {
-    this.maxIndex = this.words.length;
-    document.body.style.overflow = 'hidden'; // Lock scroll
+    this.createTypewriterEffect();
+    // Animate in if coming from planet click
+    if (localStorage.getItem('planetPageAnimate')) {
+      localStorage.removeItem('planetPageAnimate');
+      if (this.pageContentRef) {
+        const el = this.pageContentRef.nativeElement;
+        el.classList.add('animating');
+        animate(el, {
+          opacity: [0, 1],
+          scale: [0.95, 1],
+          duration: 700,
+          easing: 'easeOutExpo',
+          complete: () => {
+            el.classList.remove('animating');
+          },
+        });
+      }
+    }
   }
 
-  // @HostListener('wheel', ['$event'])
-  // onWheel(event: WheelEvent) {
-  //   if (event.deltaY > 0) {
-  //     this.revealNextWord();
-  //   } else {
-  //     this.revealPreviousWord();
-  //   }
+  navigateHome() {
+    this.router.navigate(['/home']);
+  }
 
-  //   event.preventDefault(); // Prevent actual scroll
-  // }
+  createTypewriterEffect() {
+    const container = this.containerRef.nativeElement;
+    container.innerHTML = '';
 
-  // revealNextWord() {
-  //   if (this.currentIndex >= this.maxIndex) return;
+    // Create all characters first (invisible)
+    const textElement = document.createElement('span');
+    textElement.style.display = 'inline';
 
-  //   const nextSpan = this.containerRef.nativeElement.querySelectorAll(
-  //     '.text-reveal'
-  //   )[this.currentIndex] as HTMLElement;
+    // Create spans for each character
+    for (let i = 0; i < this.text.length; i++) {
+      const charSpan = document.createElement('span');
+      charSpan.textContent = this.text[i];
+      charSpan.style.opacity = '0';
+      charSpan.style.transition = 'opacity 0.1s ease-in';
+      textElement.appendChild(charSpan);
+    }
 
-  //   if (nextSpan) {
-  //     animate(nextSpan, {
-  //       opacity: 1,
-  //       translateY: [20, 0],
-  //       duration: 400,
-  //       easing: 'easeOutCubic',
-  //     });
-  //   }
+    container.appendChild(textElement);
 
-  //   this.currentIndex++;
-  // }
+    // Create blinking cursor (initially invisible)
+    const cursor = document.createElement('span');
+    cursor.textContent = '|';
+    cursor.style.color = '#fff';
+    cursor.style.fontWeight = 'bold';
+    cursor.style.opacity = '0';
+    container.appendChild(cursor);
 
-  // revealPreviousWord() {
-  //   if (this.currentIndex <= 0) return;
+    // Add CSS animation for cursor blinking
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
 
-  //   this.currentIndex--;
+    // Make characters appear one by one
+    const charSpans = textElement.querySelectorAll('span');
+    let currentIndex = 0;
+    const typeSpeed = 50; // milliseconds per character
 
-  //   const prevSpan = this.containerRef.nativeElement.querySelectorAll(
-  //     '.text-reveal'
-  //   )[this.currentIndex] as HTMLElement;
+    const revealNextChar = () => {
+      if (currentIndex < charSpans.length) {
+        charSpans[currentIndex].style.opacity = '1';
+        currentIndex++;
+        setTimeout(revealNextChar, typeSpeed);
+      } else {
+        // All text is revealed, now start blinking cursor and show home icon
+        cursor.style.opacity = '1';
+        cursor.style.animation = 'blink 1s infinite';
+        this.showHomeIcon = true;
+      }
+    };
 
-  //   if (prevSpan) {
-  //     animate(prevSpan, {
-  //       opacity: 0,
-  //       translateY: 20,
-  //       duration: 300,
-  //       easing: 'easeInCubic',
-  //     });
-  //   }
-  // }
+    // Start the typewriter effect
+    setTimeout(revealNextChar, 500);
+  }
 }

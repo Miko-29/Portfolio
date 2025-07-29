@@ -46,6 +46,7 @@ export class HomeComponent implements AfterViewInit {
   stars = Array(100).fill(0);
   raycaster = new THREE.Raycaster();
   mouse = new THREE.Vector2();
+  isNavigating = false;
 
   ngAfterViewInit() {
     if (!this.container?.nativeElement) {
@@ -291,7 +292,58 @@ export class HomeComponent implements AfterViewInit {
   }
 
   onPlanetClick(planetName: string) {
-    console.log('Navigating to', planetName);
-    this.router.navigate(['/', planetName.toLowerCase()]);
+    if (this.isNavigating) return; // Prevent double navigation
+    this.isNavigating = true;
+    const label = this.planetLabels.find((l) => l.name === planetName);
+    if (!label) {
+      this.isNavigating = false;
+      return;
+    }
+
+    // Get the world position of the planet
+    const target = new THREE.Vector3();
+    label.mesh.getWorldPosition(target);
+
+    // Animate camera position and controls target
+    const start = {
+      x: this.camera.position.x,
+      y: this.camera.position.y,
+      z: this.camera.position.z,
+      tx: this.controls.target.x,
+      ty: this.controls.target.y,
+      tz: this.controls.target.z,
+    };
+    const end = {
+      x: target.x,
+      y: target.y,
+      z: target.z + 8, // Move closer for dramatic effect
+      tx: target.x,
+      ty: target.y,
+      tz: target.z,
+    };
+
+    animate(start, {
+      x: end.x,
+      y: end.y,
+      z: end.z,
+      tx: end.tx,
+      ty: end.ty,
+      tz: end.tz,
+      duration: 1400,
+      easing: 'easeInOutQuad',
+      update: () => {
+        this.camera.position.set(start.x, start.y, start.z);
+        this.controls.target.set(start.tx, start.ty, start.tz);
+        this.controls.update();
+        this.renderer.render(this.scene, this.camera);
+      },
+      complete: () => {
+        localStorage.setItem('planetPageAnimate', 'true');
+        setTimeout(() => {
+          this.router.navigate(['/', planetName.toLowerCase()]);
+          this.isNavigating = false;
+        }, 100);
+      },
+    });
   }
 }
