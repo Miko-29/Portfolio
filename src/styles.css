@@ -1,1 +1,29 @@
 @import "tailwindcss";
+* {
+  margin: 0;
+  padding: 0;
+  cursor: crosshair;
+}
+body,
+* {
+  cursor: none !important;
+}
+#comet-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 40%,
+    #f7f5dd 30%,
+    #617c7e 70%,
+    #56557c 100%
+  );
+  box-shadow: 0 0 16px 4px #f7f5dd, 0 0 32px 12px #617c7e, 0 0 60px 20px #56557c;
+  transition: transform 0.08s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
