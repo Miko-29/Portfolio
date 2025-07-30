@@ -32,11 +32,7 @@
       [style.left.px]="label.screenX + 40"
       [style.top.px]="label.screenY - 40"
       [style.transform]="'translate(-50%, -50%) scale(' + label.scale + ')'"
-      (click)="onPlanetClick(label.name, $event)"
-      (keydown)="onPlanetClick(label.name, $event)"
-      tabindex="0"
-      [attr.aria-label]="'Go to ' + label.name"
-      role="button"
+      (click)="onPlanetClick(label.name)"
     >
       {{ label.name | uppercase }}
     </div>

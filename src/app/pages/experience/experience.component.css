@@ -47,8 +47,8 @@ body,
   transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
 }
 .experience-card:hover {
-  box-shadow: 0 4px 32px 0 rgba(233, 245, 191, 0.18), 0 0 8px 2px #e94560cc;
-  border-color: #e94560cc;
+  box-shadow: 0 4px 32px 0 rgba(233, 245, 191, 0.18), 0 0 8px 2px #00c893cc;
+  border-color: #00c893cc;
   transform: translateY(-2px) scale(1.01);
 }
 .exp-header h2,
@@ -65,7 +65,7 @@ body,
 .exp-header h2 {
   font-weight: 700;
   letter-spacing: 1px;
-  text-shadow: 0 0 8px #e9456055, 0 0 2px #fff2;
+  text-shadow: 0 0 8px #00c89355, 0 0 2px #fff2;
 }
 .exp-header h3 {
   font-size: 1.1rem;
@@ -82,14 +82,14 @@ body,
   margin-bottom: 0;
   border-radius: 8px;
   color: #ebf5bf !important;
-  text-shadow: 0 0 4px #e9456022;
+  text-shadow: 0 0 4px #00c89322;
 }
 .exp-domains {
   color: #ebf5bf !important;
   font-style: italic;
 }
 .exp-logo {
-  box-shadow: 0 0 8px #e9456044;
+  box-shadow: 0 0 8px #00c89344;
   background: none;
   border-radius: 8px;
 }
@@ -103,7 +103,7 @@ body,
   height: 64px;
   border-radius: 16px;
   object-fit: cover;
-  box-shadow: 0 2px 12px #e9456033, 0 0 0 2px #1a1a2e;
+  box-shadow: 0 2px 12px #00c89333, 0 0 0 2px #1a1a2e;
   background: #fff2;
 }
 .exp-header h2 {
@@ -116,12 +116,12 @@ body,
 .exp-header h3 {
   margin: 2px 0 0 0;
   font-size: 1.1rem;
-  color: #60558e;
+  color: #528070;
   font-weight: 500;
 }
 .exp-meta {
   font-size: 0.98rem;
-  color: #395177;
+  color: #528070;
   margin-top: 2px;
 }
 .exp-description ul {
@@ -139,7 +139,7 @@ body,
 }
 .exp-tags span {
   background: rgba(233, 233, 233, 0.7);
-  color: #60558e;
+  color: #528070;
   font-size: 0.95rem;
   padding: 4px 12px;
   border-radius: 12px;
@@ -174,4 +174,27 @@ body,
   .exp-header h2 {
     font-size: 1.2rem;
   }
+}
+.home-icon {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10%;
+  border: 2px solid #fff;
+  padding: 10px 10px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgb(255 255 255 / 20%);
+  transition: background 0.2s, transform 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  font-family: "Alumni Sans SC", sans-serif;
+  font-size: 20px;
+}
+.home-icon:hover,
+.home-icon:focus {
+  border-color: #e94560cc;
+  box-shadow: 0 0 16px #e94560cc, 0 2px 8px #e94560cc;
+  transform: scale(1.08);
 }

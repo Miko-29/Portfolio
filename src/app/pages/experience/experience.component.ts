@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CosmosComponent } from '../../shared/cosmos/cosmos.component';
 import { CommonModule } from '@angular/common';
 import { animate } from 'animejs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-experience',
@@ -13,7 +14,7 @@ import { animate } from 'animejs';
 export class ExperienceComponent implements AfterViewInit {
   @ViewChild('pageContent', { static: false })
   pageContentRef!: ElementRef<HTMLDivElement>;
-
+  constructor(private router: Router) {}
   ngAfterViewInit() {
     if (localStorage.getItem('planetPageAnimate')) {
       localStorage.removeItem('planetPageAnimate');
@@ -31,5 +32,8 @@ export class ExperienceComponent implements AfterViewInit {
         });
       }
     }
+  }
+  navigateHome() {
+    this.router.navigate(['/home']);
   }
 }

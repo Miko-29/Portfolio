@@ -1,12 +1,7 @@
 <app-cosmos></app-cosmos>
 <!-- app-layout.component.html -->
-<div
-  *ngIf="showHomeIcon"
-  class="home-icon"
-  (click)="navigateHome()"
-  title="Go to Home"
->
-  🏠
+<div *ngIf="showHomeIcon" class="home-icon" (click)="navigateHome()">
+  <i class="fa-brands fa-space-awesome"></i>&nbsp;&nbsp;HOME
 </div>
 <div class="page-content" #pageContent>
   <div #heading class="hero-title">

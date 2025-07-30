@@ -30,7 +30,9 @@ app-cosmos {
   letter-spacing: 2px;
   margin-bottom: 16px;
   text-align: center;
-  text-shadow: 0 0 16px #e9456055, 0 0 2px #fff2;
+  text-shadow: 0 0 16px #c9fce9, 0 0 2px #fff2;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 .projects-grid {
   display: grid;
@@ -51,8 +53,8 @@ app-cosmos {
   transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
 }
 .project-card:hover {
-  box-shadow: 0 4px 32px 0 rgba(233, 245, 191, 0.18), 0 0 8px 2px #e94560cc;
-  border-color: #e94560cc;
+  box-shadow: 0 4px 32px 0 rgba(233, 245, 191, 0.18), 0 0 8px 2px #c9fce9cc;
+  border-color: #c9fce9cc;
   transform: translateY(-2px) scale(1.01);
 }
 .project-header {
@@ -66,7 +68,7 @@ app-cosmos {
   color: #fff;
   font-weight: 700;
   letter-spacing: 1px;
-  text-shadow: 0 0 8px #e9456055, 0 0 2px #fff2;
+  text-shadow: 0 0 8px #00c89355, 0 0 2px #fff2;
 }
 .project-links {
   display: flex;
@@ -76,12 +78,12 @@ app-cosmos {
   color: #ebf5bf;
   font-size: 1.8rem;
   transition: color 0.18s, text-shadow 0.18s;
-  text-shadow: 0 0 8px #e9456022;
+  text-shadow: 0 0 8px #00c89322;
   line-height: 1;
 }
 .project-link:hover {
-  color: #e94560;
-  text-shadow: 0 0 12px #e94560cc;
+  color: #00c893;
+  text-shadow: 0 0 12px #00c893cc;
 }
 .project-desc {
   color: #fff;
@@ -102,14 +104,14 @@ app-cosmos {
   padding: 4px 14px;
   border-radius: 12px;
   font-family: inherit;
-  box-shadow: 0 2px 8px #e9456022;
+  box-shadow: 0 2px 8px #52807022;
   transition: box-shadow 0.18s, border-color 0.18s, background 0.18s,
     color 0.18s;
 }
 .tech-chip:hover {
-  border-color: #e94560cc;
-  box-shadow: 0 4px 16px #e9456044;
-  background: rgba(233, 69, 96, 0.1);
+  border-color: #c9fce9cc;
+  box-shadow: 0 4px 16px #00c89344;
+  background: rgba(26, 26, 46, 0.2);
   color: #fff;
 }
 @media (max-width: 700px) {
@@ -135,4 +137,27 @@ app-cosmos {
     font-size: 0.92rem;
     border-radius: 8px;
   }
+}
+.home-icon {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10%;
+  border: 2px solid #fff;
+  padding: 10px 10px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgb(255 255 255 / 20%);
+  transition: background 0.2s, transform 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  font-family: "Alumni Sans SC", sans-serif;
+  font-size: 20px;
+}
+.home-icon:hover,
+.home-icon:focus {
+  border-color: #c9fce9cc;
+  box-shadow: 0 0 16px #c9fce9cc, 0 2px 8px #c9fce9cc;
+  transform: scale(1.08);
 }
